@@ -59,7 +59,7 @@ function App() {
       console.error('Error deleting product:', error);
     }
   };
-git  
+
 
   return (
     <div className="container mt-5">
