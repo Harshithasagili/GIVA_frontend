@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ProductList from './components/ProductList';
 import ProductForm from './components/ProductForm';
 import 'bootstrap/dist/css/bootstrap.min.css';
+const API_URL = 'https://giva-slyj.onrender.com';
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -13,17 +14,17 @@ function App() {
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch('http://localhost:5000/products');
+      const response = await fetch(`${API_URL}/products`);
       const data = await response.json();
       setProducts(data);
     } catch (error) {
       console.error('Error fetching products:', error);
     }
   };
-
+  
   const addProduct = async (product) => {
     try {
-      const response = await fetch('http://localhost:5000/products', {
+      const response = await fetch(`${API_URL}/products`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(product),
@@ -34,10 +35,10 @@ function App() {
       console.error('Error adding product:', error);
     }
   };
-
+  
   const editProduct = async (updatedProduct) => {
     try {
-      await fetch(`http://localhost:5000/products/${updatedProduct.id}`, {
+      await fetch(`${API_URL}/products/${updatedProduct.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updatedProduct),
@@ -47,10 +48,10 @@ function App() {
       console.error('Error editing product:', error);
     }
   };
-
+  
   const deleteProduct = async (id) => {
     try {
-      await fetch(`http://localhost:5000/products/${id}`, {
+      await fetch(`${API_URL}/products/${id}`, {
         method: 'DELETE',
       });
       setProducts(products.filter(p => p.id !== id));
@@ -58,6 +59,7 @@ function App() {
       console.error('Error deleting product:', error);
     }
   };
+git  
 
   return (
     <div className="container mt-5">
